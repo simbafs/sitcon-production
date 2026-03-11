@@ -8,9 +8,32 @@ import star from './銅_星.png'
 import lines2 from './線條.png'
 import lines1 from './線條組合.png'
 
+const floatKeyframes = `
+  @keyframes title {
+    0%, 100% { transform: translateY(20px)  }
+    50% { transform: translateY(-20px)  }
+  }
+
+	@keyframes star {
+		0%, 100% { transform: translateY(20px);  }
+		50% { transform: translateY(100px); }
+	}
+
+	@keyframes circle {
+		0%, 100% { transform: translateY(-20px);  }
+		50% { transform: translateY(80px); }
+	}
+
+  @keyframes logo {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+`
+
 export function ThemePage() {
 	return (
 		<div className="relative w-[1920px] h-[1080px] overflow-hidden">
+			<style>{floatKeyframes}</style>
 			<img
 				src={final}
 				style={{
@@ -56,9 +79,11 @@ export function ThemePage() {
 				src={logo}
 				style={{
 					position: 'absolute',
-					right: -780,
 					scale: 0.3,
-					top: -1269,
+					right: -780,
+					top: -1605,
+					transformOrigin: '53% 65%',
+					animation: 'logo 20s linear infinite',
 				}}
 			/>
 
@@ -67,8 +92,10 @@ export function ThemePage() {
 				style={{
 					position: 'absolute',
 					scale: 0.4,
-					left: -812,
-					top: -126,
+					left: -953,
+					top: -539,
+					transformOrigin: '53% 65%',
+					animation: 'logo reverse 30s linear infinite',
 				}}
 			/>
 
@@ -80,6 +107,8 @@ export function ThemePage() {
 					scale: 0.25,
 					top: 355,
 					left: 156,
+					transformOrigin: '50% 50%',
+					animation: 'star 5s ease-in-out infinite',
 				}}
 			/>
 
@@ -91,6 +120,7 @@ export function ThemePage() {
 					scale: 0.25,
 					top: 219,
 					left: 742,
+					animation: 'circle 6s ease-in-out infinite',
 				}}
 			/>
 
@@ -101,6 +131,7 @@ export function ThemePage() {
 					position: 'absolute',
 					top: -62,
 					scale: 0.9,
+					animation: 'title 10s ease-in-out infinite',
 				}}
 			/>
 		</div>

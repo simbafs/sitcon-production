@@ -1,5 +1,4 @@
 import bg from './主視覺.png'
-import final from './final.png'
 import logo from './Logo.png'
 import title from './title.png'
 import circle from './金_圓.png'
@@ -34,14 +33,6 @@ export function ThemePage() {
 	return (
 		<div className="relative w-[1920px] h-[1080px] overflow-hidden">
 			<style>{floatKeyframes}</style>
-			<img
-				src={final}
-				style={{
-					position: 'absolute',
-					top: 0,
-					left: 0,
-				}}
-			/>
 			{/* 底圖 */}
 			<img
 				src={bg}

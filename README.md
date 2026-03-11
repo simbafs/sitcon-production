@@ -11,6 +11,12 @@ A real-time display application for SITCON 2026 that connects to WebSocket sourc
 - Docker
 - Docker Compose v2
 
+### Pull Pre-built Image
+
+```bash
+docker pull ghcr.io/simbafs/sitcon-production/web:main
+```
+
 ### Quick Start
 
 ```bash

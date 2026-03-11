@@ -12,7 +12,8 @@ services:
             - TZ=Asia/Taipei
         restart: unless-stopped
     web:
-        build: .
+        # build: .
+        image: ghcr.io/simbafs/sitcon-production/web:main
         ports:
             - '80:80'
         depends_on:

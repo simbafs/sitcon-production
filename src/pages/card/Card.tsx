@@ -4,7 +4,7 @@ import HoverMenu from '../../components/HoverMenu'
 import { useWebSocketContext } from '../../components/WebSocketProvider'
 import { DEFAULT_CARD_SETTINGS } from '../../constants'
 import { useSetting } from '../../hooks/useSetting'
-import type { EventData } from '../../types'
+import type { CardSettings, EventData } from '../../types'
 import { formatEventTime } from '../../utils/time'
 
 import QRCode from 'react-qr-code'
@@ -17,9 +17,23 @@ import slideIconImg from './slide-icon.png'
 import slideImg from './slide.png'
 import slidoIconImg from './slido-icon.png'
 
-export default function Card() {
+export default function CardPage() {
 	const { setting, setSetting } = useSetting(DEFAULT_CARD_SETTINGS)
 
+	return <>
+		<Card setting={setting} />
+		<HoverMenu position="top-right">
+			<CardSettingsPanel settings={setting} onSettingChange={setSetting} />
+		</HoverMenu>
+	</>
+
+}
+
+type CardProps = {
+	setting: CardSettings
+}
+
+export function Card({ setting }: CardProps) {
 	const [eventData, setEventData] = useState<EventData | null>(null)
 
 	const handler = useCallback((event: string, data: unknown) => {
@@ -46,7 +60,7 @@ export default function Card() {
 	if (!eventData) {
 		return (
 			<div className="flex items-center justify-center min-h-screen">
-				<div className="text-white text-xl animate-pulse">Waiting for event data...</div>
+				<div className="text-xl">Waiting for event data...</div>
 			</div>
 		)
 	}
@@ -178,10 +192,6 @@ export default function Card() {
 					</div>
 				</div>
 			</div>
-
-			<HoverMenu position="top-right">
-				<CardSettingsPanel settings={setting} onSettingChange={setSetting} />
-			</HoverMenu>
 		</>
 	)
 }

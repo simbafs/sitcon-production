@@ -11,3 +11,10 @@ services:
         environment:
             - TZ=Asia/Taipei
         restart: unless-stopped
+    web:
+        build: .
+        ports:
+            - '80:80'
+        depends_on:
+            - ontime
+        restart: unless-stopped

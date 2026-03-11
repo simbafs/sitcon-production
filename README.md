@@ -4,6 +4,47 @@ A real-time display application for SITCON 2026 that connects to WebSocket sourc
 
 **AI-Generated Project**: This project was primarily developed using AI assistance with [opencode](https://opencode.ai/) - an interactive CLI tool for software engineering.
 
+## Docker Deployment
+
+### Prerequisites
+
+- Docker
+- Docker Compose v2
+
+### Quick Start
+
+```bash
+docker compose up --build
+```
+
+This will start:
+
+- **Frontend**: http://localhost:80 (static server on port 80)
+- **OnTime**: http://localhost:4001 (WebSocket API on port 4001)
+
+### Services
+
+| Service | Port | Description         |
+| ------- | ---- | ------------------- |
+| web     | 80   | Static frontend     |
+| ontime  | 4001 | OnTime timer server |
+
+### Commands
+
+```bash
+# Start services (rebuild if needed)
+docker compose up --build
+
+# Start services in background
+docker compose up -d --build
+
+# Stop services
+docker compose down
+
+# View logs
+docker compose logs -f
+```
+
 ## WebSocket Data Source
 
 Connects to: `ws://localhost:4001/ws`

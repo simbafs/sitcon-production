@@ -47,6 +47,7 @@ export function Card({ setting }: CardProps) {
 	const { registerHandler, unregisterHandler } = useWebSocketContext()
 
 	useEffect(() => {
+		console.log(setting.websocketPath)
 		registerHandler(setting.websocketPath, handler, {
 			ignoreOtherTags: true,
 			ignoreUnhandledEvents: true,

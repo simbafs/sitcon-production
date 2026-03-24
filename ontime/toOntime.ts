@@ -65,19 +65,24 @@ function getColourForType(type: string): string {
 async function getSlidoID(qaUrl: string | null): Promise<string | undefined> {
 	if (!qaUrl) return undefined
 
-	const match = qaUrl.match(/event\/([a-f0-9-]+)/i)
+	const match = qaUrl.match(/event\/([a-zA-Z0-9-]+)/i)
 	if (!match) return undefined
 
-	const uuid = match[1]
+	const id = match[1]
+	const isUuid = id.includes('-')
 
 	try {
-		const res = await fetch(`https://app.sli.do/eu1/api/v0.5/events/${uuid}`)
+		const url = isUuid
+			? `https://app.sli.do/eu1/api/v0.5/events/${id}`
+			: `https://app.sli.do/eu1/api/v0.5/app/events?hash=${id}`
+		const res = await fetch(url)
 		const data = (await res.json()) as { code: string }
 		return data.code
 	} catch {
 		return undefined
 	}
 }
+
 async function convertSessionToEventData(session: Agenda['sessions'][number]): Promise<EventData> {
 	const typeName = convertSessionType(session.type, agenda.session_types)
 	const speakers = convertSpeakers(session.speakers, agenda.speakers)
@@ -130,8 +135,8 @@ function convertToOntimeEvent(event: EventData): OntimeEvent {
 		custom: {
 			speaker: speakers || '',
 			type: event.type,
-			slideURL: event.slideURL || 'https://sitcon.org/2026', // TODO: a mock URL
-			hackmdURL: event.hackmdURL || 'https://sitcon.org/2026', // TODO: a mock URL
+			slideURL: event.slideURL || '',
+			hackmdURL: event.hackmdURL || '',
 			slidoID: event.slidoID || '',
 		},
 		triggers: [],

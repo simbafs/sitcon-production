@@ -12,6 +12,8 @@ import { cn } from '../../utils/cn'
 import demoBGImg from './demo-bg.png'
 import hackIconImg from './hack-icon.png'
 import hackImg from './hack.png'
+import logoAndName from './logo-and-name.png'
+import logo from './logo-white.svg'
 import noteImg from './note.png'
 import slideIconImg from './slide-icon.png'
 import slideImg from './slide.png'
@@ -20,13 +22,14 @@ import slidoIconImg from './slido-icon.png'
 export default function CardPage() {
 	const { setting, setSetting } = useSetting(DEFAULT_CARD_SETTINGS)
 
-	return <>
-		<Card setting={setting} />
-		<HoverMenu position="top-right">
-			<CardSettingsPanel settings={setting} onSettingChange={setSetting} />
-		</HoverMenu>
-	</>
-
+	return (
+		<>
+			<Card setting={setting} />
+			<HoverMenu position="top-right">
+				<CardSettingsPanel settings={setting} onSettingChange={setSetting} />
+			</HoverMenu>
+		</>
+	)
 }
 
 type CardProps = {
@@ -126,14 +129,16 @@ export function Card({ setting }: CardProps) {
 								<p className="text-[#E8E4DD] text-[28px] font-semibold">{eventData.custom.speaker}</p>
 							</div>
 						</div>
-						<img src={noteImg} alt="Note" width={96} className="absolute right-[9px] bottom-[-124px]" />
+						{!(setting.forum || setting.lightning) && (
+							<img src={noteImg} alt="Note" width={96} className="absolute right-[9px] bottom-[-124px]" />
+						)}
 					</div>
 
 					<span className="grow" />
 
 					{/* Slido 區塊 */}
 					{eventData.custom.slidoID && (
-						<div className="w-full flex flex-col items-start mb-[42px]">
+						<div className="w-full flex flex-col items-start mb-[20px] ml-[20px]">
 							<img src={slidoIconImg} width={152} />
 
 							<div
@@ -145,52 +150,63 @@ export function Card({ setting }: CardProps) {
 						</div>
 					)}
 
-					{/* 底部功能區塊 */}
-					<div className="w-full grid grid-cols-2 gap-[18px]">
-						{/* 簡報項目 */}
-						<div className="flex flex-col gap-2">
-							<div className="flex items-center gap-2 ml-[18px]">
-								<img src={slideIconImg} width={60} />
-								<img src={slideImg} width={90} />
+					{setting.forum || setting.lightning ? (
+						<div
+							className={`h-[271px] ${setting.lightning ? 'mb-[300px]' : 'mb-[20px]'} grid place-items-center`}
+						>
+							<img src={logoAndName} className="w-[90%]" />
+						</div>
+					) : (
+						<div className="w-full grid grid-cols-2 gap-[18px]">
+							{/* 簡報項目 */}
+							<div className="flex flex-col gap-2">
+								<div className="flex items-center gap-2 ml-[18px]">
+									<img src={slideIconImg} width={60} />
+									<img src={slideImg} width={90} />
+								</div>
+								{/* 圖片區域留空，可依需求放入 img */}
+								<div
+									className="aspect-square bg-[#E4C496] backdrop-blur-md rounded-[36px] border-2 border-white/20 overflow-hidden grid place-items-center"
+									style={{ boxShadow: '4px 4px 3px 0px #6C410399' }}
+								>
+									{eventData.custom.slideURL ? (
+										<QRCode
+											value={eventData.custom.slideURL}
+											size={160}
+											bgColor="transparent"
+											fgColor="#5C3D0E"
+										/>
+									) : (
+										<img src={logo} />
+									)}
+								</div>
 							</div>
-							{/* 圖片區域留空，可依需求放入 img */}
-							<div
-								className="aspect-square bg-[#E4C496] backdrop-blur-md rounded-[36px] border-2 border-white/20 overflow-hidden grid place-items-center"
-								style={{ boxShadow: '4px 4px 3px 0px #6C410399' }}
-							>
-								{eventData.custom.slideURL && (
-									<QRCode
-										value={eventData.custom.slideURL}
-										size={160}
-										bgColor="transparent"
-										fgColor="#5C3D0E"
-									/>
-								)}
+
+							{/* 共筆項目 */}
+							<div className="flex flex-col gap-2">
+								<div className="flex items-center gap-2 ml-[18px]">
+									<img src={hackIconImg} width={60} />
+									<img src={hackImg} width={90} />
+								</div>
+
+								<div
+									className="aspect-square bg-[#E4C496] backdrop-blur-md rounded-[36px] border-2 border-white/20 overflow-hidden grid place-items-center"
+									style={{ boxShadow: '4px 4px 3px 0px #6C410399' }}
+								>
+									{eventData.custom.hackmdURL ? (
+										<QRCode
+											value={eventData.custom.hackmdURL}
+											size={160}
+											bgColor="transparent"
+											fgColor="#5C3D0E"
+										/>
+									) : (
+										<img src={logo} />
+									)}
+								</div>
 							</div>
 						</div>
-
-						{/* 共筆項目 */}
-						<div className="flex flex-col gap-2">
-							<div className="flex items-center gap-2 ml-[18px]">
-								<img src={hackIconImg} width={60} />
-								<img src={hackImg} width={90} />
-							</div>
-
-							<div
-								className="aspect-square bg-[#E4C496] backdrop-blur-md rounded-[36px] border-2 border-white/20 overflow-hidden grid place-items-center"
-								style={{ boxShadow: '4px 4px 3px 0px #6C410399' }}
-							>
-								{eventData.custom.hackmdURL && (
-									<QRCode
-										value={eventData.custom.hackmdURL}
-										size={160}
-										bgColor="transparent"
-										fgColor="#5C3D0E"
-									/>
-								)}
-							</div>
-						</div>
-					</div>
+					)}
 				</div>
 			</div>
 		</>

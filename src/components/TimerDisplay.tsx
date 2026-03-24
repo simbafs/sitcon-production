@@ -18,23 +18,21 @@ export function TimerDisplay({ text, textShadow }: TimerDisplayProps) {
 		? `${textShadow.offsetX}px ${textShadow.offsetY}px ${textShadow.blurRadius}px ${textShadow.color}`
 		: 'none'
 
-	// BUG: the shadow will overflow
 	return (
-		<div ref={containerRef} className="text-black w-full h-full overflow-hidden flex items-center justify-center">
-			<div
+		<div
+			ref={containerRef}
+			className="text-[#E8E4DD] w-full h-full overflow-hidden flex items-center justify-center"
+		>
+			<h1
 				ref={elementRef}
-				className="font-mono font-bold tabular-nums leading-none whitespace-nowrap text-center"
+				className="font-kiwi-maru font-bold tabular-nums leading-none whitespace-nowrap text-center overflow-visible w-full max-h-screen text-ellipsis"
 				style={{
 					fontSize: `${fontSize}px`,
-					width: '100%',
-					maxWidth: '100vw',
-					overflow: 'hidden',
-					textOverflow: 'ellipsis',
 					textShadow: shadowStyle,
 				}}
 			>
 				{text}
-			</div>
+			</h1>
 		</div>
 	)
 }

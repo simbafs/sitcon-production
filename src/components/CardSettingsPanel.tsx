@@ -11,7 +11,9 @@ export function CardSettingsPanel({ settings, onSettingChange }: CardSettingsPan
 		<div className="bg-white border-2 border-gray-300 rounded-xl shadow-xl p-4 min-w-48">
 			<h3 className="text-black font-semibold mb-4">Card Settings</h3>
 
-			<Checkbox label="Show Background" checked={settings.bg} onChange={bg => onSettingChange({ bg })} />
+			<Checkbox label="顯示背景" checked={settings.bg} onChange={bg => onSettingChange({ bg })} />
+			<Checkbox label="論壇模式" checked={settings.forum} onChange={forum => onSettingChange({ forum })} />
+			<Checkbox label="閃電講模式" checked={settings.lightning} onChange={lightning => onSettingChange({ lightning })} />
 
 			<TextInput
 				label="WebSocket Path"

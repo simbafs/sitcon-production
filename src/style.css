@@ -12,6 +12,14 @@
 	}
 }
 
+@font-face {
+	font-family: 'Kiwi Maru';
+	font-weight: 500;
+	font-style: normal;
+	src: url('/KiwiMaru-Medium.ttf') format('truetype');
+}
+
 @theme {
 	--font-inter: 'Inter', sans-serif;
+	--font-kiwi-maru: 'Kiwi Maru', font-mono;
 }

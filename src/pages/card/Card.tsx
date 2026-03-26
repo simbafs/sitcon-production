@@ -138,7 +138,7 @@ export function Card({ setting }: CardProps) {
 
 					{/* Slido 區塊 */}
 					{eventData.custom.slidoID && (
-						<div className="w-full flex flex-col items-start mb-[40px] ml-[20px]">
+						<div className="w-full flex flex-col items-start mb-[60px] ml-[20px]">
 							<img src={slidoIconImg} width={152} />
 
 							<div

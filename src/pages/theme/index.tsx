@@ -36,10 +36,15 @@ export function ThemePage() {
 			{/* 底圖 */}
 			<img
 				src={bg}
+				width={1920}
+				height={1080}
+
 				style={{
 					position: 'absolute',
 					top: 0,
 					left: 0,
+					width: '1920px',
+					height: '1080px'
 				}}
 			/>
 
@@ -71,10 +76,10 @@ export function ThemePage() {
 				style={{
 					position: 'absolute',
 					scale: 0.3,
-					right: -780,
-					top: -1605,
+					right: -904,
+					top: -1680,
 					transformOrigin: '53% 65%',
-					animation: 'logo 20s linear infinite',
+					// animation: 'logo 20s linear infinite',
 				}}
 			/>
 
@@ -86,7 +91,8 @@ export function ThemePage() {
 					left: -953,
 					top: -539,
 					transformOrigin: '53% 65%',
-					animation: 'logo reverse 30s linear infinite',
+					transform: 'rotate(-10deg)',
+					// animation: 'logo reverse 30s linear infinite',
 				}}
 			/>
 
@@ -120,7 +126,7 @@ export function ThemePage() {
 				src={title}
 				style={{
 					position: 'absolute',
-					top: -62,
+					// top: -62,
 					scale: 0.9,
 					animation: 'title 10s ease-in-out infinite',
 				}}

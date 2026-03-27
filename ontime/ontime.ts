@@ -46,7 +46,6 @@ export interface OntimeProject {
 
 export interface OntimeSettings {
 	version: string
-	serverPort: number
 	editorKey: string
 	operatorKey: string
 	timeFormat: string

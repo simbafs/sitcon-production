@@ -104,6 +104,16 @@ async function convertSessionToEventData(session: Agenda['sessions'][number]): P
 	}
 }
 
+function filterEmptyValue(obj: Record<string, any>): Record<string, any> {
+	const filtered: Record<string, any> = {}
+	for (const key in obj) {
+		if (obj[key] !== undefined && obj[key] !== null && obj[key] !== '') {
+			filtered[key] = obj[key]
+		}
+	}
+	return filtered
+}
+
 function convertToOntimeEvent(event: EventData): OntimeEvent {
 	const duration = event.timeEnd - event.timeStart
 	const speakers = event.speaker?.join('、')
@@ -132,13 +142,13 @@ function convertToOntimeEvent(event: EventData): OntimeEvent {
 		revision: 0,
 		timeWarning: 120000,
 		timeDanger: 60000,
-		custom: {
+		custom: filterEmptyValue({
 			speaker: speakers || '',
 			type: event.type,
 			slideURL: event.slideURL || '',
 			hackmdURL: event.hackmdURL || '',
 			slidoID: event.slidoID || '',
-		},
+		}),
 		triggers: [],
 	}
 }
@@ -212,8 +222,7 @@ const ontimeOutput: OntimeOutput = {
 		custom: [],
 	},
 	settings: {
-		version: '4.4.2',
-		serverPort: 4001,
+		version: '4.6.0',
 		editorKey: '0328',
 		operatorKey: '0328',
 		timeFormat: '24',
